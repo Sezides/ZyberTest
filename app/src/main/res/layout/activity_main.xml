@@ -1,0 +1,143 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0E1016">
+
+    <!-- Прямоугольник (фон для заголовка) -->
+    <View
+        android:id="@+id/headerRect"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:background="#1C202C"
+        android:elevation="2dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Заголовок -->
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Магазин"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:elevation="5dp"
+        app:layout_constraintTop_toTopOf="@id/headerRect"
+        app:layout_constraintBottom_toBottomOf="@id/headerRect"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Поисковая строка с увеличенным отступом сверху -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/searchLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    app:boxBackgroundColor="#1C202C"
+    app:boxStrokeColor="#FFFFFF"
+    app:hintTextColor="#FFFFFF"
+    app:endIconMode="clear_text"
+    app:endIconTint="@color/white"
+    app:layout_constraintTop_toBottomOf="@id/headerRect"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/searchInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Поиск игр"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:backgroundTint="#1C202C"
+        android:imeOptions="actionSearch"
+        android:inputType="textCapSentences|textAutoComplete"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/searchLayout"
+        app:layout_constraintBottom_toTopOf="@id/buttonBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Прогресс-бар -->
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/buttonBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.5"/>
+
+    <!-- Кнопки внизу -->
+    <LinearLayout
+        android:id="@+id/buttonBar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        android:background="#12141C"
+        android:baselineAligned="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Кнопка 1 -->
+        <ImageButton
+            android:id="@+id/button1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="openSales"
+            android:src="@drawable/sales"
+            android:background="@drawable/button_background_dark"
+            android:scaleType="centerInside"
+            android:stateListAnimator="@null"/>
+
+        <!-- Кнопка 2 -->
+        <ImageButton
+            android:id="@+id/button2"
+            android:layout_width="0dp"
+            android:onClick="openNews"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/people_alt"
+            android:background="@drawable/button_background_dark"
+            android:scaleType="centerInside"
+            android:stateListAnimator="@null"/>
+
+        <!-- Кнопка 3 -->
+        <ImageButton
+            android:id="@+id/button3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/cataloge"
+            android:background="@drawable/button_background_dark"
+            android:scaleType="centerInside"
+            android:stateListAnimator="@null"/>
+
+        <!-- Кнопка 4 -->
+        <ImageButton
+            android:id="@+id/button4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="openInfo"
+            android:src="@drawable/icon"
+            android:background="@drawable/button_background_dark"
+            android:scaleType="centerInside"
+            android:stateListAnimator="@null"/>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

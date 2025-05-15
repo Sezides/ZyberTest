@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#1C202C"
+    android:padding="16dp">
+    <ImageView
+        android:id="@+id/about_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="12dp"
+        android:src="@mipmap/main"
+        android:contentDescription="Логотип"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ZyberShop"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:gravity="center"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Версия: 1.1"
+        android:textColor="#B3FFFFFF"
+        android:layout_marginTop="8dp"
+        android:gravity="center"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Удобное приложение, чтобы быть в курсе."
+        android:textColor="#B3FFFFFF"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:textAlignment="center"/>
+
+    <TextView
+        android:id="@+id/website_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Наш сайт: ZyberShop.com"
+        android:textColor="#4CAF50"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:textStyle="italic"/>
+</LinearLayout>

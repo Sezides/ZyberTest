@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NewsActivity"
+    android:background="#0E1016">
+
+    <!-- Фиксированный заголовок -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/news_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="60dp"
+        android:paddingBottom="56dp"
+    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="НОВОСТИ"
+        android:textColor="#FFFFFF"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:padding="10dp"
+        android:background="#1C202C"
+        android:elevation="8dp"
+        android:layout_gravity="top"/>
+
+    <!-- Прогресс-бар -->
+    <ProgressBar
+        android:id="@+id/news_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:elevation="8dp"/>
+
+    <!-- Кнопки внизу -->
+    <LinearLayout
+        android:id="@+id/buttonBar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        android:background="#12141C"
+        android:baselineAligned="false"
+        android:layout_gravity="bottom">
+
+        <!-- Кнопка 1 -->
+        <ImageButton
+            android:id="@+id/button1"
+            android:layout_width="0dp"
+            android:onClick="openSales"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/sales"
+            android:background="@drawable/button_background_dark"
+            android:scaleType="centerInside"
+            android:stateListAnimator="@null"/>
+
+        <!-- Кнопка 2 -->
+        <ImageButton
+            android:id="@+id/button2"
+            android:layout_width="0dp"
+            android:onClick="openNews"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/people_alt"
+            android:background="@drawable/button_background_dark"
+            android:scaleType="centerInside"
+            android:stateListAnimator="@null"/>
+
+        <!-- Кнопка 3 -->
+        <ImageButton
+            android:id="@+id/button3"
+            android:layout_width="0dp"
+            android:onClick="openCatalog"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/cataloge"
+            android:background="@drawable/button_background_dark"
+            android:scaleType="centerInside"
+            android:stateListAnimator="@null"/>
+
+        <!-- Кнопка 4 -->
+        <ImageButton
+            android:id="@+id/button4"
+            android:layout_width="0dp"
+            android:onClick="openInfo"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/icon"
+            android:background="@drawable/button_background_dark"
+            android:scaleType="centerInside"
+            android:stateListAnimator="@null"/>
+    </LinearLayout>
+</FrameLayout>
