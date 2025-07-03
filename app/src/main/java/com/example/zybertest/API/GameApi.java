@@ -11,7 +11,7 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 
 public interface GameApi {
-    @GET("/api/discounts/active")
+    @GET("api/discounts/active")
     Call<List<Discount>> getActiveDiscounts();
     @GET("api/games")
     Call<List<Game>> getGames();  // Запрос без параметров

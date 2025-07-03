@@ -65,14 +65,5 @@
                     android:textStyle="bold"/>
             </LinearLayout>
         </LinearLayout>
-
-        <!-- Скриншоты -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/screenshots_recycler"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginTop="16dp"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

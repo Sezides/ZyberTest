@@ -6,7 +6,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
-    private static final String BASE_URL_1 = "https://myzybershop.loca.lt/";
+    private static final String BASE_URL_1 = "http://26.203.178.132:5000/";
     private static final String BASE_URL_2 = "https://api.rawg.io/api/";
 
     private static Retrofit retrofit1 = null;

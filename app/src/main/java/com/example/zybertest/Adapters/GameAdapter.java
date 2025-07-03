@@ -1,6 +1,7 @@
 package com.example.zybertest.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.zybertest.GameDetailActivity;
 import com.example.zybertest.Models.Game;
 import com.example.zybertest.Models.GameScreenshot;
 import com.example.zybertest.R;
@@ -51,58 +53,9 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameViewHolder
         notifyDataSetChanged();
     }
 
-    // Вложенный класс для скриншотов
-    private static class ScreenshotAdapter extends RecyclerView.Adapter<ScreenshotAdapter.ScreenshotViewHolder> {
-        private List<GameScreenshot> screenshots;
-        private Context context;
-
-        public ScreenshotAdapter(Context context, List<GameScreenshot> screenshots) {
-            this.context = context;
-            this.screenshots = screenshots;
-        }
-
-        @NonNull
-        @Override
-        public ScreenshotViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(context).inflate(R.layout.item_screenshot, parent, false);
-            return new ScreenshotViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull ScreenshotViewHolder holder, int position) {
-            GameScreenshot screenshot = screenshots.get(position);
-            Picasso.get()
-                    .load(screenshot.getImage_url())
-                    .placeholder(R.drawable.ic_launcher_background)
-                    .error(R.drawable.ic_launcher_background)
-                    .into(holder.screenshotImage);
-        }
-
-        @Override
-        public int getItemCount() {
-            return screenshots != null ? screenshots.size() : 0;
-        }
-
-        public void setScreenshots(List<GameScreenshot> screenshots) {
-            this.screenshots = screenshots;
-            notifyDataSetChanged();
-        }
-
-        static class ScreenshotViewHolder extends RecyclerView.ViewHolder {
-            ImageView screenshotImage;
-
-            ScreenshotViewHolder(@NonNull View itemView) {
-                super(itemView);
-                screenshotImage = itemView.findViewById(R.id.screenshot_image);
-            }
-        }
-    }
-
     class GameViewHolder extends RecyclerView.ViewHolder {
         ImageView gameCover;
         TextView gameTitle, gamePrice, gameGenre;
-        RecyclerView screenshotsRecycler;
-        ScreenshotAdapter screenshotAdapter;
 
         GameViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -110,21 +63,36 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameViewHolder
             gameTitle = itemView.findViewById(R.id.game_title);
             gamePrice = itemView.findViewById(R.id.game_price);
             gameGenre = itemView.findViewById(R.id.game_genre);
-            screenshotsRecycler = itemView.findViewById(R.id.screenshots_recycler);
 
-            // Настройка адаптера для скриншотов
-            screenshotAdapter = new ScreenshotAdapter(context, null);
-            screenshotsRecycler.setLayoutManager(new LinearLayoutManager(
-                    context,
-                    LinearLayoutManager.HORIZONTAL,
-                    false
-            ));
-            screenshotsRecycler.setAdapter(screenshotAdapter);
+            // Удалено: инициализация RecyclerView для скриншотов
+
+            // Обработка клика по карточке
+            itemView.setOnClickListener(v -> {
+                Intent intent = new Intent(context, GameDetailActivity.class);
+                intent.putExtra("game", games.get(getAdapterPosition()));
+                context.startActivity(intent);
+            });
         }
 
         void bind(Game game) {
             gameTitle.setText(game.getTitle());
-            gamePrice.setText(game.getPrice() + " руб.");
+
+            // Цена с учетом скидки
+            String displayPrice;
+            try {
+                double originalPrice = Double.parseDouble(game.getPrice());
+                if (game.getDiscounts() != null && !game.getDiscounts().isEmpty()) {
+                    Game.Discount discount = game.getDiscounts().get(0);
+                    double discountPercentage = Double.parseDouble(discount.getDiscount_percentage());
+                    double discountedPrice = originalPrice * (1 - discountPercentage / 100);
+                    displayPrice = String.format("%.2f ₽ (Скидка: %s%%)", discountedPrice, discount.getDiscount_percentage());
+                } else {
+                    displayPrice = String.format("%.2f ₽", originalPrice);
+                }
+            } catch (NumberFormatException e) {
+                displayPrice = game.getPrice() + " ₽";
+            }
+            gamePrice.setText(displayPrice);
 
             if (game.getGenre() != null) {
                 gameGenre.setText(game.getGenre().getGenre_name());
@@ -140,7 +108,6 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameViewHolder
                     }
                 }
 
-                // Если подходящей обложки нет, ставим заглушку
                 if (imageUrl != null) {
                     Picasso.get()
                             .load(imageUrl)
@@ -152,18 +119,7 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameViewHolder
                 }
             }
 
-            // Скриншоты: без iscover и без вертикальных
-            if (game.getScreenshots() != null) {
-                List<GameScreenshot> filtered = new java.util.ArrayList<>();
-                for (GameScreenshot s : game.getScreenshots()) {
-                    if (!s.iscover() && !"Vertical".equalsIgnoreCase(s.getOrientation())) {
-                        filtered.add(s);
-                    }
-                }
-                screenshotAdapter.setScreenshots(filtered);
-            }
+            // Удалено: обновление списка скриншотов
         }
-
     }
-
 }
